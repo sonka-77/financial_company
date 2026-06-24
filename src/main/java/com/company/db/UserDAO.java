@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * DAO для таблицы users_roles_enterprises.
- * Реальная структура БД: одна таблица хранит id_user, id_enterprise, id_role, login, password.
+ * id_user, id_enterprise, id_role, login, password.
  */
 public class UserDAO {
 

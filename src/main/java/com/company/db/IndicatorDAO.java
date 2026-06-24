@@ -6,17 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO для работы с показателями.
- *
- * Реальная структура БД:
- *   indicators                 — id_indicator, name
- *   indicator_currencies       — id_indicator, id_currency
- *   indicator_currencies_enterprise_periods — id_enterprise, id_period, id_indicator, id_currency, value
- *   periods                    — id_period, quarter
- *   currencies                 — id_currency, type
- *   enterprise_periods         — id_enterprise, id_period
- */
+//DAO для работы с показателями.
 public class IndicatorDAO {
 
     private final Connection connection;
@@ -24,8 +14,6 @@ public class IndicatorDAO {
     public IndicatorDAO() throws SQLException {
         this.connection = DatabaseConnection.getInstance().getConnection();
     }
-
-    // ===== ПОКАЗАТЕЛИ =====
 
     public List<Indicator> getAllIndicators() throws SQLException {
         List<Indicator> list = new ArrayList<>();
@@ -91,13 +79,14 @@ public class IndicatorDAO {
         }
     }
 
-    // ===== ЗНАЧЕНИЯ ПОКАЗАТЕЛЕЙ =====
+    // значения показателей
 
     /**
-     * получить все значения показателей для предприятия.
-     * таблица: indicator_currencies_enterprise_periods
-     * первичный составной ключ: (id_enterprise, id_period, id_indicator, id_currency)
-     */
+     * для получения всех значений показателей для предприятия
+     * таблица indicator_currencies_enterprise_periods
+     * первичный составной ключ - [id_enterprise, id_period, id_indicator, id_currency]
+     * */
+
     public List<IndicatorValue> getValuesByEnterprise(int enterpriseId) throws SQLException {
         List<IndicatorValue> list = new ArrayList<>();
         String sql = "SELECT f.id_enterprise, f.id_period, f.id_indicator, f.id_currency, f.value, " +
@@ -136,11 +125,10 @@ public class IndicatorDAO {
         return list;
     }
 
-    /**
-     * добавить новое значение показателя.
-     * надо добавить запись в enterprise_periods (если нет) и в основную таблицу
-     * indicator_currencies_enterprise_periods.
-     */
+
+     //добавить новое значение показателя, которое пойдет в таблицу
+     //indicator_currencies_enterprise_periods.
+
     public boolean addValue(int enterpriseId, int indicatorId, int periodId, BigDecimal value) throws SQLException {
         // 1.убедимся что связь enterprise-period существует
         String checkEP = "SELECT COUNT(*) FROM enterprise_periods WHERE id_enterprise=? AND id_period=?";
@@ -161,7 +149,7 @@ public class IndicatorDAO {
         // 2.получить валюту показателя
         int currencyId = getCurrencyForIndicator(indicatorId);
 
-        // 3.вставить значение в таблицу фактов
+        // 3.вставить значение в таблицу фактов indicator_currencies_enterprise_periods.
         String sql = "INSERT INTO indicator_currencies_enterprise_periods " +
                      "(id_enterprise, id_period, id_indicator, id_currency, value) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {

@@ -4,10 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Singleton-класс для подключения к базе данных MySQL.
- *  одно подключение на весь сеанс работы.
- */
+
 public class DatabaseConnection {
 
     private static final String URL =

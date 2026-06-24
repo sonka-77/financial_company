@@ -5,10 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * DAO для таблицы enterprises.
- * Реальные поля: id_enterprise, name, details, phone_number, contact_person
- */
+//таблица четверки
 public class EnterpriseDAO {
 
     private final Connection connection;
@@ -28,10 +25,10 @@ public class EnterpriseDAO {
         return list;
     }
 
-    /**
-     * предприятие конкретного пользователя.
-     * в бд поле id_enterprise хранится в users_roles_enterprises.
-     */
+
+     //предприятие конкретного пользователя.
+     // в бд поле id_enterprise хранится в users_roles_enterprises.
+
     public List<Enterprise> getEnterprisesByUser(int userId) throws SQLException {
         List<Enterprise> list = new ArrayList<>();
         String sql = "SELECT e.* FROM enterprises e " +
