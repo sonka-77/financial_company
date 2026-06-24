@@ -3,8 +3,8 @@ package com.company.model;
 import java.math.BigDecimal;
 
 /**
- * Значение показателя за период.
- * В реальной БД первичный ключ составной:
+ * значение показателя за период.
+ * В реальной бд составной первичный ключ:
  * (id_enterprise, id_period, id_indicator, id_currency)
  */
 public class IndicatorValue {
@@ -16,7 +16,7 @@ public class IndicatorValue {
     private BigDecimal value;
     private String currencyType;
 
-    // Составной ключ для UPDATE/DELETE
+    // составной ключ для UPDATE/DELETE
     private int enterpriseId;
     private int currencyId;
 

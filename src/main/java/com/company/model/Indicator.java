@@ -1,8 +1,5 @@
 package com.company.model;
 
-/**
- * Модель показателя — аналог таблицы показатели.
- */
 public class Indicator {
     private int id;
     private String name;

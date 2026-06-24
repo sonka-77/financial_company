@@ -1,8 +1,6 @@
 package com.company.model;
 
-/**
- * Модель периода — аналог таблицы периоды.
- */
+
 public class Period {
     private int id;
     private String quarter;

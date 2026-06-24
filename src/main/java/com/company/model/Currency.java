@@ -1,8 +1,5 @@
 package com.company.model;
 
-/**
- * Модель валюты — аналог таблицы валюты.
- */
 public class Currency {
     private int id;
     private String type;

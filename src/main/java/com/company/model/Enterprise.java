@@ -1,8 +1,5 @@
 package com.company.model;
 
-/**
- * Модель предприятия — аналог таблицы предприятия.
- */
 public class Enterprise {
     private int id;
     private String name;
