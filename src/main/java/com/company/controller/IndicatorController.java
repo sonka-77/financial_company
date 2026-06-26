@@ -45,12 +45,12 @@ public class IndicatorController {
         return indicatorDAO.getValuesByEnterprise(enterpriseId);
     }
 
-    // Добавить значение — теперь передаём enterpriseId тоже
+    // добавить значение — теперь передаём enterpriseId тоже
     public void addValue(int enterpriseId, int indicatorId, int periodId, BigDecimal value) throws Exception {
         indicatorDAO.addValue(enterpriseId, indicatorId, periodId, value);
     }
 
-    // Обновить по составному ключу
+    // обновить по составному ключу
     public void updateValue(int enterpriseId, int periodId, int indicatorId,
                             int currencyId, BigDecimal value) throws Exception {
         indicatorDAO.updateValue(enterpriseId, periodId, indicatorId, currencyId, value);
